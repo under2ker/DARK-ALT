@@ -1,0 +1,102 @@
+services:
+  api:
+    image: python:3.12-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "pip install -r requirements.txt && uvicorn backend:app --host 0.0.0.0 --port 8000"
+    environment:
+      ENVIRONMENT: production
+      DATABASE_URL: postgresql+psycopg://darkalt:darkalt@postgres:5432/darkalt
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET: ${JWT_SECRET:-replace-before-production}
+      ADMIN_API_KEY: ${ADMIN_API_KEY:-replace-before-production}
+      CRAWLER_USER_AGENT: ${CRAWLER_USER_AGENT:-DARKALTBot/0.7 (https://example.org/contact)}
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/api/ready')\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+  frontend:
+    image: python:3.12-slim
+    working_dir: /app
+    volumes:
+      - ./:/app:ro
+    command: python -m http.server 8080
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8080/index.html')\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: darkalt
+      POSTGRES_USER: darkalt
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-darkalt}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U darkalt"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  worker:
+    image: python:3.12-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "pip install -r requirements.txt && celery -A dark_alt.celery_app:celery_app worker --loglevel=INFO"
+    environment:
+      ENVIRONMENT: production
+      DATABASE_URL: postgresql+psycopg://darkalt:darkalt@postgres:5432/darkalt
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET: ${JWT_SECRET:-replace-before-production}
+      ADMIN_API_KEY: ${ADMIN_API_KEY:-replace-before-production}
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+  scheduler:
+    image: python:3.12-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "pip install -r requirements.txt && celery -A dark_alt.celery_app:celery_app beat --loglevel=INFO"
+    environment:
+      ENVIRONMENT: production
+      DATABASE_URL: postgresql+psycopg://darkalt:darkalt@postgres:5432/darkalt
+      REDIS_URL: redis://redis:6379/0
+    restart: unless-stopped
+    depends_on:
+      worker:
+        condition: service_started
+
+volumes:
+  postgres_data:
+  redis_data:

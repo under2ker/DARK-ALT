@@ -1,0 +1,27 @@
+wikimedia:
+  enabled: true
+  type: api
+  interval: 6h
+  can_download: true
+  can_cache: false
+  can_redistribute: false
+wallhaven:
+  enabled: true
+  type: api
+  interval: 30m
+  requires_api_key: true
+openverse:
+  enabled: true
+  type: api
+  interval: 1h
+  requires_access_token: true
+  can_download: true
+  can_cache: false
+  can_redistribute: false
+nasa:
+  enabled: true
+  type: api
+  interval: 6h
+  can_download: true
+  can_cache: false
+  can_redistribute: false

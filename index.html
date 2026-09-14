@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DARK//ALT — Visual Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar">
+  <div class="brand"><span>DARK</span><span>//ALT</span></div><div class="eyebrow">VISUAL ARCHIVE</div>
+  <nav><a class="active" href="index.html"><b>01</b> EXPLORE</a><a href="account.html#collections-section"><b>02</b> COLLECTIONS</a><a href="discover.html"><b>03</b> CATEGORIES</a><a href="admin.html"><b>04</b> SOURCES</a><a href="account.html#favorites"><b>05</b> FAVORITES <i>12</i></a><a href="about.html"><b>06</b> ABOUT</a></nav>
+  <div class="sidebar-bottom"><div class="sigil">†</div><p>“Some places<br>exist only<br>on your screen.”</p><small>v1.0.0<br>© DARK//ALT<br>ALL RIGHTS RESERVED.</small></div>
+</aside>
+<main class="content">
+<header><span class="mobile-brand">DARK//ALT</span><div class="header-note">WALLPAPERS FOR A DARKER MIND</div><div class="header-actions"><button aria-label="Search">⌕ <span>SEARCH</span></button><a href="account.html">SIGN IN</a><a href="account.html#register" class="register">REGISTER</a></div></header>
+<section class="hero"><img src="https://images.unsplash.com/photo-1534791547706-3e6b1b5a2f9f?auto=format&fit=crop&w=2200&q=90" alt="Dark atmospheric mountain landscape"><div class="hero-shade"></div><div class="hero-copy"><div class="eyebrow">FEATURED <span>01 / 10</span></div><h1>BEYOND<br><em>SILENCE</em></h1><p>LOOKS BETTER<br>IN 4K</p><button class="cta">VIEW COLLECTION <span>→</span></button></div><div class="hero-tags">SPACE /<br>NATURE /<br>ABSTRACT /<br>DARK /<br>MINIMAL /</div><div class="hero-nav"><button>←</button><button>→</button></div></section>
+<section class="controls"><div class="search"><span>◯</span><input id="search" placeholder="Search wallpapers…"><kbd>⌘ K</kbd></div><div class="filters"><div><label>RESOLUTION</label><button class="filter" data-group="resolution" data-value="4K">4K</button><button class="filter" data-group="resolution" data-value="2K">2K</button><button class="filter" data-group="resolution" data-value="FHD">FHD</button></div><div><label>RATIO</label><button class="filter" data-group="ratio" data-value="16:9">16:9</button><button class="filter" data-group="ratio" data-value="21:9">21:9</button><button class="filter" data-group="ratio" data-value="9:16">9:16</button></div><div><label>TONE</label><button class="filter" data-group="tone" data-value="DARK">DARK</button><button class="filter" data-group="tone" data-value="LIGHT">LIGHT</button><button class="filter" data-group="tone" data-value="NEUTRAL">NEUTRAL</button></div><div><label>COLOR</label><div class="swatches"><span style="background:#0b0c10"></span><span style="background:#a6382b"></span><span style="background:#c67b32"></span><span style="background:#78956b"></span><span style="background:#476d91"></span><span style="background:#8e789f"></span><span style="background:#ddd"></span></div></div><div class="mood-filter"><label>MOOD</label><div id="mood-filters"></div></div></div></section>
+<section class="gallery-head"><div><div class="eyebrow">INDEX / 02481</div><h2>LATEST ADDITIONS <span>//</span></h2></div><button class="view-all">VIEW ALL →</button></section>
+<div class="tabs"><button class="active">POPULAR</button><button>RANDOM</button><button>EDITOR'S CHOICE</button></div>
+<section class="grid" id="grid"></section><div id="load-sentinel" class="load-sentinel">LOAD MORE / INDEXING</div><div class="modal" id="modal" aria-hidden="true"><div class="modal-backdrop"></div><div class="modal-panel"><button class="modal-close" aria-label="Close">×</button><img id="modal-img" alt=""><div class="modal-info"><div class="eyebrow">WALLPAPER DETAIL</div><h3 id="modal-title"></h3><p id="modal-tags"></p><div class="detail-grid"><span>RESOLUTION<strong id="modal-res"></strong></span><span>RATIO<strong>16:9</strong></span><span>QUALITY<strong id="modal-quality"></strong></span><span>SOURCE<strong id="modal-source"></strong></span></div><div class="download-config"><label>VARIANT<select id="download-preset"><option>ORIGINAL</option><option>4K</option><option>2K</option><option>FHD</option><option>CUSTOM</option></select></label><label>MODE<select id="download-mode"><option value="fit">FIT</option><option value="fill">FILL</option><option value="crop">CROP</option><option value="center">CENTER</option><option value="stretch">STRETCH</option><option value="blur_background">BLUR BACKGROUND</option></select></label><label>FORMAT<select id="download-format"><option>JPEG</option><option>WEBP</option><option>PNG</option></select></label><div id="custom-size" hidden><input id="custom-width" type="number" min="320" max="7680" value="1920" aria-label="Custom width"><span>×</span><input id="custom-height" type="number" min="240" max="4320" value="1080" aria-label="Custom height"></div></div><div class="collection-add"><select id="collection-select" aria-label="Choose collection"><option value="">ADD TO COLLECTION</option></select><button id="modal-collection">ADD +</button></div><div class="modal-actions"><button id="modal-download">DOWNLOAD →</button><button id="modal-favorite">♡ FAVORITE</button></div><div class="similar-section"><div class="eyebrow">YOU MAY ALSO LIKE //</div><div id="similar-grid" class="similar-grid"></div></div></div></div></div>
+</main></div><script src="demo-data.js"></script><script src="app.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
