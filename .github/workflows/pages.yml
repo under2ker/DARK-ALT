@@ -22,7 +22,7 @@ jobs:
           cp styles.css admin.css account.css discover.css about.css _site/
           cp app.js admin.js account.js discover.js demo-data.js _site/
           touch _site/.nojekyll
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v5`n        with:`n          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
@@ -35,3 +35,4 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
